@@ -1,7 +1,9 @@
 #!/bin/bash
+
 function cdevice()
-{	
-	cd $DEVICE
+{
+	DEVICE=device/softwinner${TARGET_PRODUCT:-wing_clover}
+	cd $ANDROID_BUILD_TOP/${DEVICE/_/-}
 }
 
 function cout()
@@ -11,12 +13,13 @@ function cout()
 
 function extract-bsp()
 {
-	LICHEE_DIR=$ANDROID_BUILD_TOP/../lichee
+	LICHEE_DIR=${LICHEE_DIR:-$ANDROID_BUILD_TOP/../lichee}
 	LINUXOUT_DIR=$LICHEE_DIR/out/android/common
 	LINUXOUT_MODULE_DIR=$LICHEE_DIR/out/android/common/lib/modules/*/*
 	CURDIR=$PWD
+	DEVICE=device/softwinner/${TARGET_PRODUCT:-wing_clover}
 
-	cd $DEVICE
+	cd $ANDROID_BUILD_TOP/${DEVICE/_/-}
 
 	#extract kernel
 	if [ -f kernel ]; then
@@ -48,25 +51,27 @@ EOF
 function make-all()
 {
 	# check lichee dir
-	LICHEE_DIR=$ANDROID_BUILD_TOP/../lichee
+	LICHEE_DIR=${LICHEE_DIR:-$ANDROID_BUILD_TOP/../lichee}
 	if [ ! -d $LICHEE_DIR ] ; then
 		echo "$LICHEE_DIR not exists!"
 		return
 	fi
 
+	CURDIR=$PWD
+
 	extract-bsp
+	cd $ANDROID_BUILD_TOP
 	m -j8
+
+	cd $CURDIR
 } 
 
 
 function pack()
 {
-	T=$(gettop)
 	export ANDROID_IMAGE_OUT=$OUT
-	export PACKAGE=$T/../lichee/tools/pack
-    local DEVICE=device/softwinner/`echo $TARGET_PRODUCT | sed 's/_/-/g'`
-
-	sh $DEVICE/package.sh $1
+	export PACKAGE=${LICHEE_DIR:-$ANDROID_BUILD_TOP/../lichee}/tools/pack
+	sh $ANDROID_BUILD_TOP/device/softwinner/${TARGET_PRODUCT/_/-}/package.sh $1
 }
 
 function exdroid_diff()
