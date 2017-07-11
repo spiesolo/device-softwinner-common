@@ -198,9 +198,13 @@ int hwc_prepare(hwc_composer_device_1_t *dev, size_t numDisplays,
             break;
         }
 
-        memcpy(&ctx->frame[disp], &psDisplay->frame, sizeof(hwc_rect_t));
+#if 0
+        // Why to get the rectangle parameters passed in the frame
+        // from surfaceflinger?
+        //memcpy(&ctx->frame[disp], &psDisplay->frame, sizeof(hwc_rect_t));
+#endif
 
-        if(disp == 1)
+        if(disp == HWC_DISPLAY_EXTERNAL)
         {
             if(!ctx->hdmi_hpd && !ctx->tv_hpd && !ctx->vga_hpd)
             {
@@ -223,12 +227,15 @@ int hwc_prepare(hwc_composer_device_1_t *dev, size_t numDisplays,
             forceSoftwareRendering = 1;
     	}
 
+#if 0
+		// Why need special handling of systemui.ImageWallpaper?
 		if(psDisplay->wallpaper_flag == 1)
 		{
 			forceSoftwareRendering = 1;
 			psDisplay->wallpaper_flag = 0;
 		}
 		else
+#endif
 		{
 			for(i = 0; i < psDisplay->numHwLayers-1; i++)
 	    	{
@@ -693,8 +700,10 @@ static int hwc_device_open(const struct hw_module_t* module, const char* name,
     
     psHwcDevice->prepare         = hwc_prepare;
     psHwcDevice->set             = hwc_set;
+#if 0 // hwc_getParameter & hwc_getParameter is sunxi specific
     psHwcDevice->setParameter    = hwc_setParameter;
     psHwcDevice->getParameter    = hwc_getParameter;
+#endif
     psHwcDevice->registerProcs   = hwc_register_procs;
     psHwcDevice->eventControl	= hwc_eventControl;
 	psHwcDevice->blank			= hwc_blank;

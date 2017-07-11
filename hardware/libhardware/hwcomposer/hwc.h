@@ -90,9 +90,10 @@ typedef struct
     int                 time_stamp;
     int                 show_black[2];
 
-#ifdef DISPLAY_CMD_SET3DMODE
+#if SUPPORT_FEATURE_3D
     __display_3d_mode   cur_3d_mode[2];
 #endif
+
     int                 hint_hdmi_mode;// 4:720p50, 5:720p60, 8:1080p24, 9:1080p50, 10:1080p60, 255:auto
 
     void*               pvPrivateData;

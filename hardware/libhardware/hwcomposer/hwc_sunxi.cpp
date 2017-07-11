@@ -409,12 +409,14 @@ static int _hwcdev_setup_layer(SUNXI_hwcdev_context_t *ctx, __disp_layer_info_t 
         layer_info->fb.pre_multiply = 1;
     }
 
+#if SUPPORT_FEATURE_3D
 	if((disp == 1) && (ctx->cur_3d_mode[disp] == DISPLAY_3D_LEFT_RIGHT_HDMI || ctx->cur_3d_mode[disp] == DISPLAY_3D_TOP_BOTTOM_HDMI) 
 		&& (layer->compositionType == HWC_OVERLAY))
 	{
 		layer_info->ck_enable = 1;
 	}
 	else
+#endif
 	{
 		layer_info->ck_enable = 0;
 	}
@@ -535,7 +537,9 @@ static int _hwcdev_setup_layer(SUNXI_hwcdev_context_t *ctx, __disp_layer_info_t 
     layer_info->pipe = psPipe->pipeType;
     layer_info->prio = psPipe->assignedLayerZOrder;
 
+#if SUPPORT_FEATURE_3D
     _hwcdev_layer_config_3d(disp, layer_info);
+#endif
     
     return 1;
 }   
@@ -742,8 +746,10 @@ SUNXI_hwcdev_context_t* hwcdev_create_device(void)
     ctx->out_mode[1] = hdmi_mode;
     ctx->display_persent[1] = 96;
 
+#if SUPPORT_FEATURE_3D
     ctx->cur_3d_mode[0] = DISPLAY_2D_ORIGINAL;
     ctx->cur_3d_mode[1] = DISPLAY_2D_ORIGINAL;
+#endif
 
     pthread_create(&ctx->sVsyncThread, NULL, VsyncThreadWrapper, ctx);
 

@@ -2,6 +2,8 @@
 #include "hwc.h"
 
 
+#if SUPPORT_FEATURE_3D
+// Disble 3D support on sunxi
 int _hwcdev_layer_config_3d(int disp, __disp_layer_info_t *layer_info)
 {
     SUNXI_hwcdev_context_t *ctx = &gSunxiHwcDevice;
@@ -60,7 +62,6 @@ int _hwcdev_layer_config_3d(int disp, __disp_layer_info_t *layer_info)
             layer_info->scn_win.height = 1080;
         }*/
     }
-
     return 0;
 }
 
@@ -141,6 +142,7 @@ int _hwc_device_set_3d_mode(int disp, __display_3d_mode mode)
 
     return ret;
 }
+#endif
 
 int _hwc_device_set_backlight_mode(int disp, int mode)                   
 {                                                                                            
