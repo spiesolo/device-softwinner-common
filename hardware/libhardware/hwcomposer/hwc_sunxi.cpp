@@ -34,8 +34,12 @@ static int _hwcdev_is_valid_format(int format)
     case HAL_PIXEL_FORMAT_RGB_888:
     case HAL_PIXEL_FORMAT_RGB_565:
     case HAL_PIXEL_FORMAT_BGRA_8888:
+#ifdef HAL_PIXEL_FORMAT_RGBA_5551
     case HAL_PIXEL_FORMAT_RGBA_5551:
+#endif
+#ifdef HAL_PIXEL_FORMAT_RGBA_4444
     case HAL_PIXEL_FORMAT_RGBA_4444:
+#endif
     case HAL_PIXEL_FORMAT_YV12:
 	case HAL_PIXEL_FORMAT_YCrCb_420_SP:
         return 1;
@@ -363,18 +367,22 @@ static int _hwcdev_setup_layer(SUNXI_hwcdev_context_t *ctx, __disp_layer_info_t 
             layer_info->fb.seq = DISP_SEQ_ARGB;
             layer_info->fb.br_swap = 0;
             break;
+#ifdef HAL_PIXEL_FORMAT_RGBA_5551
         case HAL_PIXEL_FORMAT_RGBA_5551:
             layer_info->fb.mode = DISP_MOD_INTERLEAVED;
             layer_info->fb.format = DISP_FORMAT_ARGB1555;
             layer_info->fb.seq = DISP_SEQ_ARGB;
             layer_info->fb.br_swap = 1;
             break;
+#endif
+#ifdef HAL_PIXEL_FORMAT_RGBA_4444
         case HAL_PIXEL_FORMAT_RGBA_4444:
             layer_info->fb.mode = DISP_MOD_INTERLEAVED;
             layer_info->fb.format = DISP_FORMAT_ARGB4444;
             layer_info->fb.seq = DISP_SEQ_ARGB;
             layer_info->fb.br_swap = 1;
             break;
+#endif
         case HAL_PIXEL_FORMAT_YV12:
             layer_info->fb.mode = DISP_MOD_NON_MB_PLANAR;
             layer_info->fb.format = DISP_FORMAT_YUV420;
