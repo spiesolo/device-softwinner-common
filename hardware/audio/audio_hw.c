@@ -617,7 +617,7 @@ static void select_output_device(struct sunxi_audio_device *adev)
 
 	int pa_should_on = speaker_on;
 
-	char prop_value[16];
+	char prop_value[PROPERTY_VALUE_MAX];
 	ret = property_get("audio.without.earpiece", prop_value, "");
 	if (ret > 0)
 	{
