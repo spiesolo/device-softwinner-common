@@ -12,6 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+LOCAL_MODULE := LibFusion_ARM_cpp
+LOCAL_SRC_FILES := LibFusion_ARM_cpp.a
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := STATIC_LIBRARIES
+LOCAL_MODULE_SUFFIX := .a
+#LOCAL_MODULE_STEM := $(LOCAL_PATH)/LibFusion_ARM_cpp.a
+include $(BUILD_PREBUILT)
+
 # HAL module implemenation, not prelinked, and stored in
 # hw/<SENSORS_HARDWARE_MODULE_ID>.<ro.product.board>.so
 include $(CLEAR_VARS)
@@ -34,7 +43,7 @@ LOCAL_SRC_FILES := 						\
 				ProximitySensor.cpp             \
 				TempSensor.cpp                  \
 				PressSensor.cpp			\
-                                InputEventReader.cpp            
+				InputEventReader.cpp
     
 else
 LOCAL_SRC_FILES := 						\
@@ -46,15 +55,15 @@ LOCAL_SRC_FILES := 						\
 				MagnetoSensor.cpp               \
 				GyroSensor.cpp                  \
 				LightSensor.cpp                 \
-                                ProximitySensor.cpp             \
-                                TempSensor.cpp                  \
+				ProximitySensor.cpp             \
+				TempSensor.cpp                  \
 				PressSensor.cpp			\
-                                InputEventReader.cpp 
-   
+				InputEventReader.cpp
 endif      
 
 LOCAL_SHARED_LIBRARIES := liblog libcutils libdl
-
-LOCAL_LDFLAGS = $(LOCAL_PATH)/LibFusion_ARM_cpp.a
+LOCAL_STATIC_LIBRARIES := LibFusion_ARM_cpp
+# disable warning: shared library text segment is not shareable
+LOCAL_LDFLAGS := -Wl,--no-warn-shared-textrel
 
 include $(BUILD_SHARED_LIBRARY)
