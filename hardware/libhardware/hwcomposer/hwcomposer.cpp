@@ -26,7 +26,6 @@
 
 #include <hardware/hwcomposer.h>
 #include <drv_display.h>
-#include <fb.h>
 #include <EGL/egl.h>
 #include <hardware_legacy/uevent.h>
 #include <sys/resource.h>

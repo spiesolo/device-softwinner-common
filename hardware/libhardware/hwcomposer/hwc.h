@@ -5,7 +5,6 @@
 #include <hardware/hwcomposer.h>
 #include "gralloc_priv.h"
 #include <drv_display.h>
-#include <fb.h>
 
 #include <fcntl.h>
 #include <errno.h>
