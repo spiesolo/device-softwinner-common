@@ -772,7 +772,8 @@ static int start_output_stream(struct sunxi_stream_out *out)
 
     ALOGD("start_output_stream: card:%d, port:%d, rate:%d", card, port, out->config.rate);
 
-    out->pcm = pcm_open_req(card, port, PCM_OUT | PCM_MMAP | PCM_NOIRQ, &out->config, DEFAULT_OUT_SAMPLING_RATE);
+    //out->pcm = pcm_open_req(card, port, PCM_OUT | PCM_MMAP | PCM_NOIRQ, &out->config, DEFAULT_OUT_SAMPLING_RATE);
+    out->pcm = pcm_open(card, port, PCM_OUT | PCM_MMAP | PCM_NOIRQ, &out->config);
 
     if (!pcm_is_ready(out->pcm)) {
         ALOGE("cannot open pcm_out driver: %s", pcm_get_error(out->pcm));
