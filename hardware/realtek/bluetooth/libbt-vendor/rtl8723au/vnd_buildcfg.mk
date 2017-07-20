@@ -6,7 +6,12 @@ ifeq (,$(wildcard $(SRC)))
 SRC := $(call my-dir)/include/vnd_generic.txt
 endif
 GEN := $(intermediates)/vnd_buildcfg.h
+
+ifneq ($(wildcard external/bluetooth/bluedroid/tools/gen-buildcfg.sh),)
 TOOL := $(TOP_DIR)external/bluetooth/bluedroid/tools/gen-buildcfg.sh
+else
+TOOL := $(LOCAL_PATH)/../gen-buildcfg.sh
+endif
 
 $(GEN): PRIVATE_PATH := $(call my-dir)
 $(GEN): PRIVATE_CUSTOM_TOOL = $(TOOL) $< $@
