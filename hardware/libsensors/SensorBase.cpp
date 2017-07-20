@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 #define LOG_TAG "SensorBase"
+#include <string.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <math.h>
