@@ -4,7 +4,11 @@ ifneq ($(BOARD_HAVE_BLUETOOTH_RTK),)
 
 include $(CLEAR_VARS)
 
+ifneq ($(wildcard $(TOP_DIR)/external/bluetooth/bluedroid),)
 BDROID_DIR := $(TOP_DIR)external/bluetooth/bluedroid
+else
+BDROID_DIR := $(TOP_DIR)system/bt
+endif
 
 LOCAL_SRC_FILES := \
         src/bt_vendor_rtk.c \
