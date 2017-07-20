@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+#include <string.h>
 #include <fcntl.h>
 #include <linux/ioctl.h>
 #include <linux/uinput.h>
