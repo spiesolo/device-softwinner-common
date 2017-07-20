@@ -14,22 +14,23 @@ LOCAL_SHARED_LIBRARIES:= \
 	
 # cedarx libraries
 #LOCAL_SHARED_LIBRARIES += \
-#	libfacedetection \
-#	libion_alloc \
-#	libjpgenc
+#   libfacedetection \
+#   libion_alloc \
+#   libjpgenc
 
 LOCAL_SHARED_LIBRARIES += \
-	libion_alloc \
-	libjpgenc
+    libion_alloc \
+    libjpgenc
 	
-LOCAL_C_INCLUDES += 								\
-	frameworks/base/core/jni/android/graphics 		\
-	frameworks/native/include/media/openmax			\
-	hardware/libhardware/include/hardware			\
-	framework/native/include						\
-	frameworks/av/media/CedarX-Projects/CedarX/include/include_camera \
+LOCAL_C_INCLUDES += \
+    frameworks/base/core/jni/android/graphics \
+    frameworks/native/include/media/openmax \
+    hardware/libhardware/include/hardware \
+    framework/native/include \
+    frameworks/av/media/CedarX-Projects/CedarX/include/include_camera \
+    system/media/camera/include \
     $(LOCAL_PATH)/include \
-	$(TARGET_HARDWARE_INCLUDE)
+    $(TARGET_HARDWARE_INCLUDE)
 
 LOCAL_SRC_FILES := \
 	HALCameraFactory.cpp \
