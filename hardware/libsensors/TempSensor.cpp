@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#define LOG_TAG "TempSensor"
 
+#include <string.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <math.h>
@@ -24,8 +26,10 @@
 #include <dirent.h>
 #include <sys/select.h>
 #include <dlfcn.h>
+
 #include <cutils/log.h>
 #include <cutils/properties.h>
+
 #include "TempSensor.h"
 
 #define TEMP_DATA_NAME    tempSensorInfo.sensorName

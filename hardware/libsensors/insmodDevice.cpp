@@ -1,3 +1,5 @@
+#define LOG_TAG "insmodDevice"
+
 #include <hardware/sensors.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -16,7 +18,6 @@
 #include <cutils/properties.h>
 #include "sensors.h"
 
-#define LOG_TAG "insmodDevice"
 
 extern  "C" int init_module(void *, unsigned long, const char *);
 extern  "C" int delete_module(const char *, unsigned int);

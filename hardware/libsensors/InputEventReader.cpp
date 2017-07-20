@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#define LOG_TAG "InputReaderReader"
 
+#include <string.h>
 #include <stdint.h>
 #include <errno.h>
 #include <unistd.h>

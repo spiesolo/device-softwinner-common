@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+#define LOG_TAG "PressSensor"
+#include <string.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <math.h>
@@ -24,8 +26,10 @@
 #include <dirent.h>
 #include <sys/select.h>
 #include <dlfcn.h>
+
 #include <cutils/log.h>
 #include <cutils/properties.h>
+
 #include "PressSensor.h"
 
 #define PRESS_DATA_NAME    "mpl3115" 
