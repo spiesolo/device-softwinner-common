@@ -1,4 +1,7 @@
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "CameraDebug.h"
 #if DBG_BUFFER_LIST
 #define LOG_NDEBUG 0
